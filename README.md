@@ -77,7 +77,7 @@ axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 ![Crear un nuevo articulo](public/gif/visualizar.gif)
 
 * Puedes eliminar cualquier articulo desde la lista de los mismos automaticamente se actualiza la lista.
-![Crear un nuevo articulo](public/gif/visualizar.gif)
+![Crear un nuevo articulo](public/gif/eliminar.gif)
 
 ## Licencia
 [MIT](LICENSE).
