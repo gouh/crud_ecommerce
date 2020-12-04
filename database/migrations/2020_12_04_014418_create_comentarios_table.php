@@ -20,7 +20,9 @@ class CreateComentariosTable extends Migration {
 		});
 
 		Schema::table('comentarios', function($table) {
-			$table->foreign('articulos_id')->references('id')->on('articulos');
+			$table->foreign('articulos_id')
+			->references('id')->on('articulos')
+      ->onDelete('cascade');
 		});
 	}
 
