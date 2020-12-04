@@ -32,14 +32,14 @@ Route::get('update/articulo/{id}',  function ($id) {
 	return view('articulos.editar', ['id' => $id]);
 });
 
-// Actualiza un articulo
+// Actualiza un articulo (Debido aque la acción PATCH no acepta form-data se cambio a POST)
 Route::post('update/articulo', [ArticulosController::class, 'update']);
 
 // Elimina un articulo
 Route::delete('articulo/{id}', [ArticulosController::class, 'destroy']);
 
-// Lista todos los comentarios de un articulo
+// Obtiene un articulo con todo y sus comentarios
 Route::get('articulo_comentarios/{idArticulo}', [ArticulosController::class, 'get']);
 
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Agrega un nuevo comentario a un articulo
+Route::post('comentario', [ComentariosController::class, 'store']);
