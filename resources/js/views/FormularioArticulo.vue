@@ -8,7 +8,7 @@
 						<div class="row">
 							<!-- Username -->
 							<div class="form-group col-sm-6">
-								<label for="propietario">Nombre o Username (Del propietario)</label>
+								<label for="propietario">Nombre o Username (propietario)</label>
 								<input type="text" name="propietario" id="propietario"  class="form-control" :maxlength="50" v-model="propietario">
 								<small id="helpId" class="text-muted">máximo 50 caracteres ({{propietario.length + '/50'}})</small><br>
 								<label id="helpId" class="text-danger" v-if="errors.propietario.length">{{errors.propietario}}</label>

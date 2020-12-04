@@ -2160,6 +2160,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -51452,7 +51460,7 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "form-group col-sm-6" }, [
                   _c("label", { attrs: { for: "propietario" } }, [
-                    _vm._v("Nombre o Username (Del propietario)")
+                    _vm._v("Nombre o Username (propietario)")
                   ]),
                   _vm._v(" "),
                   _c("input", {
@@ -51725,6 +51733,10 @@ var render = function() {
             ])
           }),
           _vm._v(" "),
+          _vm.articulos.length == 0
+            ? _c("div", { staticClass: "col-sm-12" }, [_vm._m(0)])
+            : _vm._e(),
+          _vm._v(" "),
           _c("div", { staticClass: "col-sm-12" }, [
             _c(
               "ul",
@@ -51771,7 +51783,31 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "max-w-xl mx-auto sm:px-6 lg:px-8" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "flex items-center pt-8 sm:justify-start sm:pt-0 text-center"
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "ml-4 text-lg text-gray-500 uppercase tracking-wider"
+            },
+            [_vm._v("No hay articulos 😔")]
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

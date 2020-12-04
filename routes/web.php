@@ -5,7 +5,11 @@ use App\Http\Controllers\ArticulosController;
 
 // Ruta para ingresar un nuevo articulo
 Route::get('/', function () {
-	return view('articulos.listado');
+	return view('articulos.listado', [
+		'links' => [
+			'nuevo' => 'articulo'
+		]
+	]);
 });
 
 Route::get('articulos', [ArticulosController::class, 'index']);

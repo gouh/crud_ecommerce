@@ -22,6 +22,14 @@
 				</div>
 			</div>
 
+			<div class="col-sm-12" v-if="articulos.length == 0">
+				<div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+						<div class="flex items-center pt-8 sm:justify-start sm:pt-0 text-center">
+								<div class="ml-4 text-lg text-gray-500 uppercase tracking-wider">No hay articulos 😔</div>
+						</div>
+				</div>
+			</div>
+
 			<!-- Paginación -->
 			<div class="col-sm-12">
 				<ul class="pagination mt-3 float-right">
