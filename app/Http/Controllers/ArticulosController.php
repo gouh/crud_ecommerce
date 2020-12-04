@@ -84,10 +84,10 @@ class ArticulosController extends Controller {
 	 * @param  \App\Models\Articulos  $articulos
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $req, Articulos $articulos) {
-		$art = Articulos::findOrFail($req->id);
-
+	public function update(Request $req) {
+		$art = Articulos::find($req->id);
 		$foto = $art->foto;
+
 		if ($req->foto) {
 			$validator = Validator::make($req->all(), [
 				'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -100,7 +100,7 @@ class ArticulosController extends Controller {
 			}
 
 			# Elimina y guarda la siguiente foto
-			unlink('public/images/' . $art->foto);
+			unlink(app_path().'/../public/images/'. $art->foto);
 			# Nombra la foto
 			$foto = time() . '.' . $req->foto->extension();
 			$req->foto->move(public_path('images'), $foto);
