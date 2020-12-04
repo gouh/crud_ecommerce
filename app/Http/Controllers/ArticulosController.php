@@ -58,6 +58,12 @@ class ArticulosController extends Controller {
 		];
 	}
 
+	/**
+	 * Obtiene un articulo con sus comentarios
+	 *
+	 * @param number $id
+	 * @return \Illuminate\Http\Response
+	 */
 	public function get($id) {
 		$articulo = Articulos::findOrFail($id);
 		$articulo->comentarios;
@@ -66,7 +72,8 @@ class ArticulosController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Obtiene un articulo en especial unicamente para mostrarlo junto
+	 * con una vista (mas que nada para no descartar el uso de blade)
 	 *
 	 * @param  \App\Models\Articulos  $articulos
 	 * @return \Illuminate\Http\Response
@@ -78,7 +85,7 @@ class ArticulosController extends Controller {
 	}
 
 	/**
-	 * Actualiza un articulo parcial o totalmente
+	 * Actualiza un articulo parcial o totalmente un articulo
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  \App\Models\Articulos  $articulos
