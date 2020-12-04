@@ -28,7 +28,25 @@ class ComentariosController extends Controller {
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request) {
+	public function store(Request $req) {
+		$comentario = new Comentarios();
+		$comentario->propietario = $req->propietario;
+		$comentario->comentario = $req->comentario;
+		$comentario->articulos_id = $req->articulo_id;
+
+		if($comentario->save()){
+			return [
+				'success' => true,
+				'message' => 'Se guardo correctamente su comentario',
+				'data' => $comentario
+			];
+		}
+
+		return [
+			'success' => false,
+			'menssage' => 'No se pudo guardar el comentario intente de nuevo por favor.',
+			'data' => null
+		];
 	}
 
 	/**
@@ -37,7 +55,8 @@ class ComentariosController extends Controller {
 	 * @param  \App\Models\Comentarios  $comentarios
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Comentarios $comentarios) {
+	public function show($idArticulo) {
+		return Comentarios::where(['articulos_id' => $idArticulo])->get();
 	}
 
 	/**

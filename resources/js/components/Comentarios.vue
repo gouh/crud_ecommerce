@@ -4,11 +4,11 @@
 				<button type="button" class="btn btn-primary float-right" @click="addlike">{{ articulo.likes }} Me gusta 👍</button>
 			</div>
 
-			<div class="col-sm-12 mt-2">
-				<div class="card" v-for="comentario in comentarios" :key="comentario.id">
+			<div class="col-sm-12">
+				<div class="card mt-2" v-for="comentario in comentarios" :key="comentario.id">
 					<div class="card-body">
 						<h4>{{ comentario.propietario }} <small>, dijo:</small></h4>
-						<p>{{ comentario.comentario }}</p>
+						<p v-html="comentario.comentario"></p>
 						<small class="float-right">{{ formatDate(comentario.created_at) }}</small>
 					</div>
 				</div>
@@ -26,6 +26,7 @@
 						<div class="form-group ">
 							<vue-editor v-model="comentario" :editor-toolbar="barraHerramientas" ></vue-editor>
 						</div>
+						<button type="button" class="btn btn-primary float-right" @click="guardarComentario">Guardar</button>
 					</div>
 				</div>
 			</div>
@@ -36,6 +37,7 @@
 <script>
 import { VueEditor } from "vue2-editor";
 import moment from 'moment'
+
 export default {
 		components: {
 			VueEditor
@@ -44,9 +46,9 @@ export default {
 		data(){
 			return {
 				autorComentario: '',
+				comentario: '',
 				articulo: { likes: 0 },
 				comentarios: [],
-				comentario: '',
 				barraHerramientas: [
 					[{ 'font': [] }],
 					[{ 'header': [false, 1, 2, 3, 4, 5, 6, ] }],
@@ -69,6 +71,25 @@ export default {
 			addlike(){
 				axios.post('update/articulo', {id: this.id, likes: ++this.articulo.likes})
 					.then(console.log)
+			},
+			guardarComentario(){
+				if (!this.autorComentario || !this.comentario) {
+					this.$swal('Error', 'Su username y su comentario deben contener valores', 'error')
+					return;
+				}
+
+				axios.post('comentario', {
+					propietario: this.autorComentario,
+					comentario: this.comentario,
+					articulo_id: this.id
+				})
+					.then(response => {
+						let res = response.data
+						this.$swal(res.success ? 'Ok' : 'Error', res.message, res.success ? 'success' : 'error')
+						this.renderDatosArticulo()
+						this.autorComentario = ''
+						this.comentario = ''
+					})
 			},
 			formatDate(value){
         if (value) {
