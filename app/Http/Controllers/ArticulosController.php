@@ -136,7 +136,10 @@ class ArticulosController extends Controller {
 	 */
 	public function destroy($id) {
 		$articulo = Articulos::find($id);
+		$foto = $articulo->foto;
 		if($articulo->delete()){
+			# Cuando se elimina el articulo tambien se elimina la foto
+			unlink(app_path().'/../public/images/'. $foto);
 			return [
 				'success' => true,
 				'message' => 'Se elimino el articulo',
