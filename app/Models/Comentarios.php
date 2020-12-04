@@ -7,4 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comentarios extends Model {
 	use HasFactory;
+
+	public $timestamps = true;
+	protected $table = 'comentarios';
+	protected $primaryKey = 'id';
+	protected $fillable = [
+		'propietario', 'comentario', 'post_id'
+	];
+
+	public function articulo() {
+		return $this->belongsTo(Articulos::class);
+	}
 }

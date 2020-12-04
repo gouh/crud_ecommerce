@@ -14,4 +14,8 @@ class Articulos extends Model {
 		protected $fillable = [
 			'propietario', 'titulo', 'articulo', 'foto', 'likes'
 		];
+
+		public function comentarios() {
+			return $this->hasMany(Comentarios::class);
+		}
 }

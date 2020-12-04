@@ -15,7 +15,12 @@ class CreateComentariosTable extends Migration {
 			$table->id();
 			$table->string('propietario', 50);
 			$table->text('comentario');
+			$table->unsignedBigInteger('articulos_id');
 			$table->timestamps();
+		});
+
+		Schema::table('comentarios', function($table) {
+			$table->foreign('articulos_id')->references('id')->on('articulos');
 		});
 	}
 
