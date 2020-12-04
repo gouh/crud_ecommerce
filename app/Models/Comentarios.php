@@ -11,8 +11,9 @@ class Comentarios extends Model {
 	public $timestamps = true;
 	protected $table = 'comentarios';
 	protected $primaryKey = 'id';
+	protected $foreignKey = 'articulo_id';
 	protected $fillable = [
-		'propietario', 'comentario', 'post_id'
+		'propietario', 'comentario', 'articulo_id'
 	];
 
 	public function articulo() {
