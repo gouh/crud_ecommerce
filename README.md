@@ -55,4 +55,33 @@ php artisan migrate:fresh
 axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 ```
 
+* La configuración de enviroment por default para utilizar se encuentra en el archivo
+
+```
+.env.usar
+```
+
+* Antes de ejecutar cualquier comando te recomiendo que crees la base de datos con el nombre:
+
+```
+ecommerce
+```
+
+## Demo
+* En este GIF te muestro como crear un nuevo articulo, este formulario contiene validaciones por campo o por imagen.
+![Crear un nuevo articulo](public/gif/crear.gif)
+
+* Te muestro la lista de los articulos la cual tiene una paginación simple, por medio de esta es posible editar o eliminar articulos.
+![Listar articulos](public/gif/listar.gif)
+
+* Puedes editar un articulo hay que resaltar que las imagenes son sustituidas cuando el articulo es editado y se le agrega una nueva imagen, este formulario como el de crear un nuevo articulo tiene las mismas validaciones.
+![Crear un nuevo articulo](public/gif/crear.gif)
+
+* Puedes visualizar un articulo y agregarle comentarios asi como también "likes", estos comentarios se eliminan en cascada en caso de que el articulo se elimine.
+![Crear un nuevo articulo](public/gif/visualizar.gif)
+
+* Puedes eliminar cualquier articulo desde la lista de los mismos automaticamente se actualiza la lista.
+![Crear un nuevo articulo](public/gif/visualizar.gif)
+
+## Licencia
 [MIT](LICENSE).
