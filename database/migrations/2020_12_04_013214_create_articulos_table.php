@@ -14,6 +14,7 @@ class CreateArticulosTable extends Migration {
 		Schema::create('articulos', function (Blueprint $table) {
 			$table->id();
 			$table->string('propietario', 50);
+			$table->string('titulo', 50);
 			$table->text('articulo');
 			$table->string('foto', 70);
 			$table->unsignedInteger('likes');
