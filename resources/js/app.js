@@ -16,7 +16,7 @@ Vue.use(VueSweetalert2)
 
 Vue.component('comentarios', require('./components/Comentarios.vue').default);
 Vue.component('listado-articulo', require('./views/ListadoArticulo.vue').default);
-Vue.component('formulario-articulo', require('./views/FormularioArticulo.vue').default);
+Vue.component('nuevo-articulo', require('./views/NuevoArticulo.vue').default);
 Vue.component('editar-articulo', require('./views/EditarArticulo.vue').default);
 
 const app = new Vue({
