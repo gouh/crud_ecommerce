@@ -13,6 +13,7 @@ Route::get('/', function () {
 });
 
 Route::get('articulos', [ArticulosController::class, 'index']);
+Route::delete('articulo/{id}', [ArticulosController::class, 'destroy']);
 Route::get('articulo/{id}', [ArticulosController::class, 'show']);
 Route::get('articulo', function () {
 	return view('articulos.nuevo');

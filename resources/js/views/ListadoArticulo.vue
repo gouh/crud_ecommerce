@@ -7,6 +7,11 @@
 				<div class="mt-2 card">
 					<div class="card-body">
 						<div class="row">
+							<div class="col-sm-12">
+								<button type="button" class="close" @click="eliminarArticulo(articulo.id)">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
 							<div class="col-sm-2">
 								<img :src="'images/' + articulo.foto" class="img-thumbnail" height="100" width="100">
 							</div>
@@ -74,6 +79,29 @@ export default {
 			},
 			abrirArticulo(idArticulo){
 				window.location.href = 'articulo/'+ idArticulo
+			},
+			eliminarArticulo(idArticulo) {
+				this.$swal({
+					title: 'Atención',
+					html: 'Esta seguro de eliminar este articulo',
+					showCloseButton: true,
+					showCancelButton: true,
+					focusConfirm: false,
+					confirmButtonText:'Sí',
+					confirmButtonAriaLabel: 'Thumbs up, great!',
+					cancelButtonText:'No',
+					cancelButtonAriaLabel: 'Thumbs down',
+					icon: 'question'
+				}).then(result => {
+					if (result.isConfirmed) {
+						axios.delete('articulo/' + idArticulo)
+							.then(response => {
+								let res = response.data
+								this.$swal(res.success ? 'Ok' : 'Error', res.message, res.success ? 'success' : 'error')
+								this.listarArticulos();
+							})
+					}
+				})
 			}
 		},
 		mounted(){

@@ -93,6 +93,20 @@ class ArticulosController extends Controller {
 	 * @param  \App\Models\Articulos  $articulos
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Articulos $articulos) {
+	public function destroy($id) {
+		$articulo = Articulos::find($id);
+		if($articulo->delete()){
+			return [
+				'success' => true,
+				'message' => 'Se elimino el articulo',
+				'data' => $articulo
+			];
+		}
+
+		return [
+			'success' => false,
+			'menssage' => 'No se pudo eliminar el articulo intente de nuevo por favor.',
+			'data' => null
+		];
 	}
 }
