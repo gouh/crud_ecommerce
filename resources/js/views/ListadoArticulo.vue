@@ -11,15 +11,19 @@
 								<button type="button" class="close" @click="eliminarArticulo(articulo.id)">
 									<span aria-hidden="true">&times;</span>
 								</button>
+								<button type="button" class="close" @click="actualizarArticulo(articulo.id)">
+									<span aria-hidden="true">✏️</span>
+								</button>
 							</div>
 							<div class="col-sm-2">
 								<img :src="'images/' + articulo.foto" class="img-thumbnail" height="100" width="100">
 							</div>
 							<div class="col-sm-10">
-								<h4>{{articulo.titulo}} <small>Escrito por <i>{{articulo.propietario}}</i></small></h4>
+								<h4>{{articulo.titulo}}</h4>
 								<div class="row ql-snow">
-									<div class="col-sm-12 ql-editor" v-html="articulo.articulo.substring(0,100)"></div>
+									<div class="col-sm-12 ql-editor" v-html="articulo.articulo.substring(0,500)"></div>
 								</div>
+								<small>Por <b>{{articulo.propietario}}</b> {{ formatDate(articulo.created_at) }}</small>
 								<a class="btn btn-primary float-right" href="#" @click.prevent="abrirArticulo(articulo.id)">Seguir leyendo</a>
 							</div>
 						</div>
@@ -52,7 +56,9 @@
 </template>
 
 <script>
-import { VueEditor } from "vue2-editor";
+import { VueEditor } from "vue2-editor"
+import moment from 'moment'
+
 export default {
 		data(){
 			return {
@@ -102,6 +108,14 @@ export default {
 							})
 					}
 				})
+			},
+      formatDate(value){
+        if (value) {
+          return moment(String(value)).format('DD-MM-YYYY - hh:mm')
+        }
+			},
+			actualizarArticulo(id) {
+				window.location.href = 'update/articulo/' + id
 			}
 		},
 		mounted(){
