@@ -28,6 +28,11 @@ $ npm i
 
 ## Usar
 #### Cabe resaltar que todo debe ser sobre la raiz del proyecto
+* Antes de ejecutar cualquier comando te recomiendo que crees la base de datos con el nombre:
+```
+ecommerce
+```
+
 * Para correr el proyecto (Backend)
 ```
 $ php artisan serve --port=8000
@@ -39,7 +44,6 @@ $ npm run dev
 ```
 
 * o
-
 ```
 $ npm run watch
 ```
@@ -50,21 +54,13 @@ php artisan migrate:fresh
 ```
 
 * Es probable que si corre el proyecto en un virtualhost de apache tenga que cambiar la url base de Axios, esta se encuentra en el archivo resources\js\app.js (se recomienda correr el proyecto en localhost en el puerto 8000).
-
 ```
 axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 ```
 
 * La configuración de enviroment por default para utilizar se encuentra en el archivo
-
 ```
 .env.usar
-```
-
-* Antes de ejecutar cualquier comando te recomiendo que crees la base de datos con el nombre:
-
-```
-ecommerce
 ```
 
 ## Demo
