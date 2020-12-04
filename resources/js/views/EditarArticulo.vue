@@ -102,23 +102,13 @@ export default {
 				this.fotoSeleccionada = event.target.files[0]
 
 				if (!tiposPermitidos.includes(this.fotoSeleccionada.type)) {
-					this.$notify({
-						type: 'warn',
-						group: 'notificacionArticulo',
-						title: 'Cuidado',
-						text: 'Verifique sus errores por favor.'
-					})
+					this.$swal('Cuidado', 'La imagen no tiene un formato valido.', 'error')
 					this.fotoSeleccionada = null
 					event.target.value = ''
 				}
 
 				if (this.fotoSeleccionada.size > 2e6) {
-					this.$notify({
-						type: 'warn',
-						group: 'notificacionArticulo',
-						title: 'Cuidado',
-						text: 'La imagen pesa mas de 2mb'
-					})
+					this.$swal('Cuidado', 'La imagen pesa mas de 2mb', 'error')
 					this.fotoSeleccionada = null
 					event.target.value = ''
 				}
@@ -128,12 +118,7 @@ export default {
 				this.clickGuardar = true
 
 				if (this.errors.exist) {
-					this.$notify({
-						type: 'error',
-						group: 'notificacionArticulo',
-						title: 'Error',
-						text: 'Verifique sus errores por favor.'
-					})
+					this.$swal('Error', 'Verifique sus errores por favor.', 'error')
 					return;
 				}
 
@@ -151,25 +136,23 @@ export default {
 				this.btnLock = true
 				axios.post('update/articulo', formulario)
 					.then(response => {
-						this.$notify({
-							type: response.data.success ? 'success' : 'error',
-							group: 'notificacionArticulo',
-							title: response.data.success ?  'Ok' : 'Hubo un error',
-							text: response.data.message
-						})
-
-						if (response.data.success) {
-							setTimeout(() => {
+						this.$swal({
+							title: 'Atención',
+							html: response.data.message,
+							confirmButtonText:'Ok',
+							icon: response.data.success ? 'success' : 'error'
+						}).then(result => {
+							if (response.data.success) {
 								window.location.replace('/')
-							}, 1000);
-						}
+							}
+						})
 					})
 					.catch(error => {
-						this.$notify({
-							type: 'warning',
-							group: 'notificacionArticulo',
-							title: ':c Creo que hubo un error',
-							text: 'Al parecer hubo un error en el servidor, intente de nuevo'
+						this.$swal({
+							title: 'Atención',
+							html: ':c Creo que hubo un error',
+							confirmButtonText:'Ok',
+							icon: 'error'
 						})
 					})
 					.finally(() => {
