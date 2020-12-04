@@ -67,7 +67,7 @@ export default {
 					})
 			},
 			addlike(){
-				axios.patch('articulo', {id: this.id, likes: ++this.articulo.likes})
+				axios.post('update/articulo', {id: this.id, likes: ++this.articulo.likes})
 					.then(console.log)
 			},
 			formatDate(value){
