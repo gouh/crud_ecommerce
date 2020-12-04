@@ -71,7 +71,7 @@ axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 ![Listar articulos](public/gif/listar.gif)
 
 * Puedes editar un articulo hay que resaltar que las imagenes son sustituidas cuando el articulo es editado y se le agrega una nueva imagen, este formulario como el de crear un nuevo articulo tiene las mismas validaciones.
-![Crear un nuevo articulo](public/gif/crear.gif)
+![Crear un nuevo articulo](public/gif/editar.gif)
 
 * Puedes visualizar un articulo y agregarle comentarios asi como también "likes", estos comentarios se eliminan en cascada en caso de que el articulo se elimine.
 ![Crear un nuevo articulo](public/gif/visualizar.gif)
