@@ -138,7 +138,7 @@ export default {
 
 						if (response.data.success) {
 							setTimeout(() => {
-								window.location.replace("/articulos")
+								window.location.replace('/')
 							}, 1000);
 						}
 					})
