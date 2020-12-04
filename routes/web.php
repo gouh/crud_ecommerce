@@ -9,6 +9,7 @@ Route::get('/', function () {
 });
 
 Route::get('articulos', [ArticulosController::class, 'index']);
+Route::get('articulo/{id}', [ArticulosController::class, 'show']);
 Route::get('articulo', function () {
 	return view('articulos.nuevo');
 });

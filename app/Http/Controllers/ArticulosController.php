@@ -64,7 +64,8 @@ class ArticulosController extends Controller {
 	 * @param  \App\Models\Articulos  $articulos
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Articulos $articulos) {
+	public function show($id) {
+		return view('articulos.articulo', ['articulo' => Articulos::findOrFail($id)]);
 	}
 
 	/**

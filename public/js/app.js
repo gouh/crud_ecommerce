@@ -2061,7 +2061,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (response.data.success) {
           setTimeout(function () {
-            window.location.replace("/articulos");
+            window.location.replace('/');
           }, 1000);
         }
       })["catch"](function (error) {
