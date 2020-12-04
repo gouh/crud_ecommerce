@@ -17,7 +17,7 @@ class CreateArticulosTable extends Migration {
 			$table->string('titulo', 50);
 			$table->text('articulo');
 			$table->string('foto', 70);
-			$table->unsignedInteger('likes');
+			$table->unsignedInteger('likes')->default(0);
 			$table->timestamps();
 		});
 	}

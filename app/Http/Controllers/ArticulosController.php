@@ -2,33 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Articulos;
 use Illuminate\Http\Request;
+use App\Models\Articulos;
+use Illuminate\Support\Facades\Validator;
 
 class ArticulosController extends Controller {
 	/**
-	 * Display a listing of the resource.
+	 * Muestra un listado de articulos
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
+		return Articulos::orderBy('id', 'DESC')->paginate(5);
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Almacena un nuevo articulo
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create() {
-	}
+	public function store(Request $req) {
+		# Valida la imagen
+		$validator = Validator::make($req->all(), [
+			'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+		]);
+		if ($validator->fails()) {
+			return [
+				'success' => false,
+				'message' => 'La imagen no respeta el tipo o tamaño que se establece'
+			];
+		}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request) {
+		# Nombra la foto
+		$foto = time() . '.' . $req->foto->extension();
+		# Almacena un nuevo articulo
+		$articulo = new Articulos;
+		$articulo->propietario = filter_var($req->propietario, FILTER_SANITIZE_STRING);
+		$articulo->titulo = filter_var($req->titulo, FILTER_SANITIZE_STRING);
+		$articulo->articulo = filter_var($req->articulo);
+		$articulo->foto = filter_var($foto);
+
+		if($articulo->save()){
+			$req->foto->move(public_path('images'), $foto);
+			return [
+				'success' => true,
+				'message' => 'Se guardo correctamente su articulo',
+				'data' => $articulo
+			];
+		}
+
+		return [
+			'success' => false,
+			'menssage' => 'No se pudo guardar el articulo intente de nuevo por favor.',
+			'data' => null
+		];
 	}
 
 	/**
