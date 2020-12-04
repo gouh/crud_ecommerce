@@ -9,7 +9,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<button type="button" class="close" @click="eliminarArticulo(articulo.id)">
-									<span aria-hidden="true">&times;</span>
+									<span aria-hidden="true">✖️</span>
 								</button>
 								<button type="button" class="close" @click="actualizarArticulo(articulo.id)">
 									<span aria-hidden="true">✏️</span>
@@ -24,7 +24,7 @@
 									<div class="col-sm-12 ql-editor" v-html="articulo.articulo.substring(0,500)"></div>
 								</div>
 								<small>Por <b>{{articulo.propietario}}</b> {{ formatDate(articulo.created_at) }}</small>
-								<a class="btn btn-primary float-right" href="#" @click.prevent="abrirArticulo(articulo.id)">Seguir leyendo</a>
+								<a class="btn btn-primary float-right" href="#" @click.prevent="abrirArticulo(articulo.id)">👁️ Seguir leyendo</a>
 							</div>
 						</div>
 					</div>
