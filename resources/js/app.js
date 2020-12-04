@@ -8,11 +8,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import Notifications from 'vue-notification'
+import VueSweetalert2 from 'vue-sweetalert2';
 axios.defaults.baseURL = 'http://127.0.0.1:8000/';
+
+Vue.use(Notifications)
+Vue.use(VueSweetalert2)
 
 Vue.component('listado-articulo', require('./views/ListadoArticulo.vue').default);
 Vue.component('formulario-articulo', require('./views/FormularioArticulo.vue').default);
-Vue.use(Notifications)
 
 const app = new Vue({
     el: '#app',
