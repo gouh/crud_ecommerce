@@ -2,6 +2,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 
+			<!-- Articulos -->
 			<div class="col-md-12" v-for="articulo in articulos" :key="articulo.id">
 				<div class="mt-2 card">
 					<div class="card-body">
@@ -14,11 +15,22 @@
 								<div class="row ql-snow">
 									<div class="col-sm-12 ql-editor" v-html="articulo.articulo.substring(0,100)"></div>
 								</div>
-								<button type="button" class="btn btn-primary float-right">Seguir leyendo</button>
+								<a class="btn btn-primary float-right" href="#" @click.prevent="abrirArticulo(articulo.id)">Seguir leyendo</a>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<!-- Paginación -->
+			<div class="col-sm-12">
+				<ul class="pagination mt-3 float-right">
+					<li class="page-item" v-for="link in links" :key="link.label" :class="{'active': link.active}">
+						<a href="#" class="page-link" @click.prevent="obtenerPagina(link.url)">
+							<span v-html="link.label"></span>
+						</a>
+					</li>
+				</ul>
 			</div>
 
 		</div>
@@ -31,7 +43,8 @@ import { VueEditor } from "vue2-editor";
 export default {
 		data(){
 			return {
-				articulos: ''
+				articulos: '',
+				links: []
 			}
 		},
 		methods: {
@@ -39,7 +52,20 @@ export default {
 				axios.get('articulos')
 					.then(response => {
 						this.articulos = response.data.data
+						this.links = response.data.links
 					})
+			},
+			obtenerPagina(url){
+				if (url != null) {
+					axios({ url: '', baseURL: url })
+						.then(response => {
+							this.articulos = response.data.data
+							this.links = response.data.links
+						})
+				}
+			},
+			abrirArticulo(idArticulo){
+				window.location.href = 'articulo/'+ idArticulo
 			}
 		},
 		mounted(){

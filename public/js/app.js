@@ -2148,11 +2148,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      articulos: ''
+      articulos: '',
+      links: []
     };
   },
   methods: {
@@ -2161,7 +2174,24 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('articulos').then(function (response) {
         _this.articulos = response.data.data;
+        _this.links = response.data.links;
       });
+    },
+    obtenerPagina: function obtenerPagina(url) {
+      var _this2 = this;
+
+      if (url != null) {
+        axios({
+          url: '',
+          baseURL: url
+        }).then(function (response) {
+          _this2.articulos = response.data.data;
+          _this2.links = response.data.links;
+        });
+      }
+    },
+    abrirArticulo: function abrirArticulo(idArticulo) {
+      window.location.href = 'articulo/' + idArticulo;
     }
   },
   mounted: function mounted() {
@@ -51637,55 +51667,103 @@ var render = function() {
       _c(
         "div",
         { staticClass: "row justify-content-center" },
-        _vm._l(_vm.articulos, function(articulo) {
-          return _c("div", { key: articulo.id, staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "mt-2 card" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-2" }, [
-                    _c("img", {
-                      staticClass: "img-thumbnail",
-                      attrs: {
-                        src: "images/" + articulo.foto,
-                        height: "100",
-                        width: "100"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-10" }, [
-                    _c("h4", [
-                      _vm._v(_vm._s(articulo.titulo) + " "),
-                      _c("small", [
-                        _vm._v("Escrito por "),
-                        _c("i", [_vm._v(_vm._s(articulo.propietario))])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row ql-snow" }, [
-                      _c("div", {
-                        staticClass: "col-sm-12 ql-editor",
-                        domProps: {
-                          innerHTML: _vm._s(articulo.articulo.substring(0, 100))
+        [
+          _vm._l(_vm.articulos, function(articulo) {
+            return _c("div", { key: articulo.id, staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "mt-2 card" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-2" }, [
+                      _c("img", {
+                        staticClass: "img-thumbnail",
+                        attrs: {
+                          src: "images/" + articulo.foto,
+                          height: "100",
+                          width: "100"
                         }
                       })
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary float-right",
-                        attrs: { type: "button" }
-                      },
-                      [_vm._v("Seguir leyendo")]
-                    )
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("h4", [
+                        _vm._v(_vm._s(articulo.titulo) + " "),
+                        _c("small", [
+                          _vm._v("Escrito por "),
+                          _c("i", [_vm._v(_vm._s(articulo.propietario))])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row ql-snow" }, [
+                        _c("div", {
+                          staticClass: "col-sm-12 ql-editor",
+                          domProps: {
+                            innerHTML: _vm._s(
+                              articulo.articulo.substring(0, 100)
+                            )
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary float-right",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.abrirArticulo(articulo.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Seguir leyendo")]
+                      )
+                    ])
                   ])
                 ])
               ])
             ])
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-12" }, [
+            _c(
+              "ul",
+              { staticClass: "pagination mt-3 float-right" },
+              _vm._l(_vm.links, function(link) {
+                return _c(
+                  "li",
+                  {
+                    key: link.label,
+                    staticClass: "page-item",
+                    class: { active: link.active }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.obtenerPagina(link.url)
+                          }
+                        }
+                      },
+                      [
+                        _c("span", {
+                          domProps: { innerHTML: _vm._s(link.label) }
+                        })
+                      ]
+                    )
+                  ]
+                )
+              }),
+              0
+            )
           ])
-        }),
-        0
+        ],
+        2
       ),
       _vm._v(" "),
       _c("notifications", { attrs: { group: "notificacionArticulo" } })
